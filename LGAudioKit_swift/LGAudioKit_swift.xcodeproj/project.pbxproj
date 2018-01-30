@@ -11,6 +11,9 @@
 		CE40AB28201F0FCF007DFDA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40AB27201F0FCF007DFDA9 /* ViewController.swift */; };
 		CE40AB2D201F0FCF007DFDA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE40AB2C201F0FCF007DFDA9 /* Assets.xcassets */; };
 		CE40AB30201F0FCF007DFDA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE40AB2E201F0FCF007DFDA9 /* LaunchScreen.storyboard */; };
+		CE40AB8920204ECC007DFDA9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40AB8820204ECB007DFDA9 /* SwiftNotice.swift */; };
+		CE40AB8B2020583A007DFDA9 /* LGSoundRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40AB8A2020583A007DFDA9 /* LGSoundRecorder.swift */; };
+		CE40AB8D20205857007DFDA9 /* LGSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40AB8C20205857007DFDA9 /* LGSoundPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		CE40AB2C201F0FCF007DFDA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE40AB2F201F0FCF007DFDA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE40AB31201F0FCF007DFDA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE40AB8820204ECB007DFDA9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
+		CE40AB8A2020583A007DFDA9 /* LGSoundRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSoundRecorder.swift; sourceTree = "<group>"; };
+		CE40AB8C20205857007DFDA9 /* LGSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGSoundPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +42,8 @@
 		CE40AB19201F0FCF007DFDA9 = {
 			isa = PBXGroup;
 			children = (
+				CE40AB8620204ECB007DFDA9 /* Class */,
+				CE40AB8720204ECB007DFDA9 /* Vender */,
 				CE40AB24201F0FCF007DFDA9 /* LGAudioKit_swift */,
 				CE40AB23201F0FCF007DFDA9 /* Products */,
 			);
@@ -59,6 +67,23 @@
 				CE40AB31201F0FCF007DFDA9 /* Info.plist */,
 			);
 			path = LGAudioKit_swift;
+			sourceTree = "<group>";
+		};
+		CE40AB8620204ECB007DFDA9 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				CE40AB8A2020583A007DFDA9 /* LGSoundRecorder.swift */,
+				CE40AB8C20205857007DFDA9 /* LGSoundPlayer.swift */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		CE40AB8720204ECB007DFDA9 /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				CE40AB8820204ECB007DFDA9 /* SwiftNotice.swift */,
+			);
+			path = Vender;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,8 +157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE40AB8920204ECC007DFDA9 /* SwiftNotice.swift in Sources */,
 				CE40AB28201F0FCF007DFDA9 /* ViewController.swift in Sources */,
+				CE40AB8B2020583A007DFDA9 /* LGSoundRecorder.swift in Sources */,
 				CE40AB26201F0FCF007DFDA9 /* AppDelegate.swift in Sources */,
+				CE40AB8D20205857007DFDA9 /* LGSoundPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

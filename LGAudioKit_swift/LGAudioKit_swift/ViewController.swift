@@ -58,10 +58,18 @@ class ViewController: UIViewController {
 	
 	@objc func startRecordVoice() {
 		print("startRecordVoice...")
+		var imagesArray = Array<UIImage>()
+		for i in 1...7 {
+			imagesArray.append(UIImage(named: "loading\(i)")!)
+		}
+		self.pleaseWaitWithImages(imagesArray, timeInterval: 50)
+		
+		LGSoundRecorder.shared.startRecord(superView: self.view, recordPath: "")
 	}
 	
 	@objc func cancelRecordVoice() {
 		print("cancelRecordVoice...")
+		self.clearAllNotice()
 	}
 	
 	@objc func confirmRecordVoice() {
@@ -72,6 +80,7 @@ class ViewController: UIViewController {
 			] as [String : Any]
 		self.dataArray.addObjects(from: [soundModel])
 		self.tableView.reloadData()
+		self.clearAllNotice()
 	}
 	
 	@objc func updateCancelRecordVoice() {
@@ -84,6 +93,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate {
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+		print("didSelectRowAt", indexPath.row)
+		LGSoundPlayer.shared.playAudio(URLString: "", atIndex: indexPath.row)
+	}
 	
 }
 
