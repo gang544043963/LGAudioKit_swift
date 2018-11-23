@@ -76,15 +76,22 @@ class ViewController: UIViewController {
 	}
 	
 	@objc func confirmRecordVoice() {
+        LGSoundRecorder.shared.stopSoundRecord(superView: self.view)
+        self.clearAllNotice()
+        
+        let recordPath = LGSoundRecorder.shared.recordPath
+        let seconds = LGSoundRecorder.shared.recordSeconds
+        if seconds < 1 || recordPath == nil || recordPath == "" {
+            return;
+        }
 		print("confirmRecordVoice...")
 		let soundModel = [
-            "soundFilePath": LGSoundRecorder.shared.recordPath,
-            "seconds": "5"
+            "soundFilePath": recordPath! as String,
+            "seconds": seconds
 			] as [String : Any]
-        LGSoundRecorder.shared.stopSoundRecord(superView: self.view)
+        
 		self.dataArray.addObjects(from: [soundModel])
 		self.tableView.reloadData()
-		self.clearAllNotice()
 	}
 	
 	@objc func updateCancelRecordVoice() {
@@ -118,8 +125,10 @@ extension ViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell.init(style: .`default`, reuseIdentifier: nil)
 		let data: NSDictionary = self.dataArray[indexPath.row] as! NSDictionary
-		cell.textLabel?.text = String(describing: data["seconds"])
-		cell.backgroundColor = .purple
+        cell.textLabel?.text = "录音文件\(String(describing: data["seconds"] as! NSInteger))s，点击播放☞▶️"
+        let voiceBar = UIView()
+        let width: NSInteger = data["seconds"] as! NSInteger + 30
+        voiceBar.frame = CGRect.init(x: 10, y: 5, width: width, height: 40)
 		return cell
 	}
 	

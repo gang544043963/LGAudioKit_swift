@@ -19,6 +19,10 @@ class LGSoundRecorder: NSObject, AVAudioRecorderDelegate {
 	static let shared = LGSoundRecorder()
     var recordPath: NSString!
     var audioRecorder: AVAudioRecorder!
+    var timer: Timer!
+    var recordSeconds: NSInteger = 0
+    
+    //MARK: Public
 
 	/**
 	*  开始录音
@@ -27,14 +31,22 @@ class LGSoundRecorder: NSObject, AVAudioRecorderDelegate {
 	*  @param path 音频文件保存路径
 	*/
 	public func startRecord(superView: UIView, recordPath: NSString) {
+        recordSeconds = 0
         self.recordPath = (recordPath as String) + "/" + String(Date().timeIntervalSince1970) + ".caf" as NSString
 		self.startRecord()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.recordSeconds += 1
+            print("正在录音：\(self.recordSeconds)s")
+        }
 	}
 	
 	/**
 	*  录音结束
 	*/
 	public func stopSoundRecord(superView: UIView) {
+        if timer != nil {
+            timer.invalidate()
+        }
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -44,14 +56,14 @@ class LGSoundRecorder: NSObject, AVAudioRecorderDelegate {
 	*  更新录音显示状态,手指向上滑动后 提示松开取消录音
 	*/
 	public func soundRecordFailed(superView: UIView) {
-		
+		timer.invalidate()
 	}
 	
 	/**
 	*  更新录音状态,手指重新滑动到范围内,提示向上取消录音
 	*/
 	public func readyCancelSound() {
-		
+        
 	}
 	
 	/**
@@ -77,6 +89,7 @@ class LGSoundRecorder: NSObject, AVAudioRecorderDelegate {
 		
 	}
     
+    //MARK: Private
     func startRecord() {
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
