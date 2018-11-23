@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 public enum LGAudioPlayerState: NSInteger {
 	case LGAudioPlayerStateNormal/** 未播放状态 */
@@ -20,9 +21,16 @@ public protocol LGAudioPlayerDelegate: class {
 	
 }
 
-public class LGSoundPlayer: NSObject {
+public class LGSoundPlayer: NSObject, AVAudioPlayerDelegate {
 	
 	static let shared = LGSoundPlayer()
+    
+    var audioEngine: AVAudioEngine!
+    
+    var audioPlayerNode: AVAudioPlayerNode!
+    
+    var audioPlayer: AVAudioPlayer!
+    
 	
     public var URLString: NSString = ""
 	
@@ -31,7 +39,16 @@ public class LGSoundPlayer: NSObject {
 	public weak var delegate: LGAudioPlayerDelegate?
 	
 	public func playAudio(URLString: NSString, atIndex: NSInteger) {
-		
+        if URLString == "" {
+            return
+        }
+        let audioData = NSData.dataWithContentsOfMappedFile(URLString as String)
+        
+        try! audioPlayer = AVAudioPlayer.init(data: audioData as! Data)
+        audioPlayer.volume = 1.0
+//        audioPlayer.delegate = self
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
 	}
 	
 	public func stopAudioPlayer() {
