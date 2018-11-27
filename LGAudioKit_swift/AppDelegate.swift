@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  LGAudioKit_swift
 //
-//  Created by ligang on 2018/1/29.
+//  Created by ligang on 2018/11/20.
 //  Copyright © 2018年 LG. All rights reserved.
 //
 

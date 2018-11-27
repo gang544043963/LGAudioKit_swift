@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  LGAudioKit_swift
 //
-//  Created by ligang on 2018/1/29.
+//  Created by ligang on 2018/11/20.
 //  Copyright © 2018年 LG. All rights reserved.
 //
 
@@ -20,6 +20,7 @@ class ViewController: UIViewController {
 		self.view.backgroundColor = UIColor.brown;
 		self.initTableView()
 		self.initButton()
+        LGSoundRecorder.shared.delegate = self
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
 		button.addTarget(self, action: #selector(startRecordVoice) , for: .touchDown)
 		button.addTarget(self, action: #selector(cancelRecordVoice) , for: .touchUpOutside)
 		button.addTarget(self, action: #selector(confirmRecordVoice) , for: .touchUpInside)
-		button.addTarget(self, action: #selector(updateCancelRecordVoice) , for: .touchDragExit)
+		button.addTarget(self, action: #selector(readyCancelRecordVoice) , for: .touchDragExit)
 		button.addTarget(self, action: #selector(updateContinueRecordVoice) , for: .touchDragEnter)
 		button.layer.borderColor = UIColor.black.cgColor
 		button.layer.borderWidth = 1
@@ -60,28 +61,25 @@ class ViewController: UIViewController {
 	
 	@objc func startRecordVoice() {
 		print("startRecordVoice...")
-        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-		var imagesArray = Array<UIImage>()
-		for i in 1...7 {
-			imagesArray.append(UIImage(named: "loading\(i)")!)
-		}
-		self.pleaseWaitWithImages(imagesArray, timeInterval: 50)
-		
-        LGSoundRecorder.shared.startRecord(superView: self.view, recordPath: dirPath as NSString)
+        self .showRecordingHUD()
+		let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        LGSoundRecorder.shared.startRecord(recordPath: dirPath as NSString)
 	}
 	
 	@objc func cancelRecordVoice() {
 		print("cancelRecordVoice...")
 		self.clearAllNotice()
+        LGSoundRecorder.shared.stopSoundRecord()
 	}
 	
 	@objc func confirmRecordVoice() {
-        LGSoundRecorder.shared.stopSoundRecord(superView: self.view)
+        LGSoundRecorder.shared.stopSoundRecord()
         self.clearAllNotice()
         
         let recordPath = LGSoundRecorder.shared.recordPath
         let seconds = LGSoundRecorder.shared.recordSeconds
         if seconds < 1 || recordPath == nil || recordPath == "" {
+            print("录音不足1s")
             return;
         }
 		print("confirmRecordVoice...")
@@ -94,13 +92,43 @@ class ViewController: UIViewController {
 		self.tableView.reloadData()
 	}
 	
-	@objc func updateCancelRecordVoice() {
-		print("updateCancelRecordVoice...")
+	@objc func readyCancelRecordVoice() {
+        self.clearAllNotice()
+        self.notice("准备取消发送", type: .error, autoClear: false)
+		print("readyCancelRecordVoice...")
 	}
 	
 	@objc func updateContinueRecordVoice() {
+        self.clearAllNotice()
+        self.showRecordingHUD()
 		print("updateContinueRecordVoice...")
 	}
+    
+    func showRecordingHUD() {
+        var imagesArray = Array<UIImage>()
+        for i in 1...7 {
+            imagesArray.append(UIImage(named: "loading\(i)")!)
+        }
+        self.pleaseWaitWithImages(imagesArray, timeInterval: 50)
+    }
+}
+
+extension ViewController: LGSoundRecorderDelegate {
+    func soundRecordFailed() {
+        
+    }
+    
+    func soundRecordTooShort() {
+        
+    }
+    
+    func soundRecordDidStop() {
+        
+    }
+    
+    func soundRecordTimerTicks(second: NSInteger) {
+        print("LG-----\(second)")
+    }
 }
 
 extension ViewController: UITableViewDelegate {
