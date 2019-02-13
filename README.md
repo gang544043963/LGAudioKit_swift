@@ -1,5 +1,7 @@
 # LGAudioKit_swift
 
+[OC版传送门](https://github.com/gang544043963/LGAudioKit/blob/master/README.md)
+
 ## sound recorder and player
 
 - 对AVAudioRecorder和AVAudioPlayer进行了封装，只暴露简单整洁的接口
