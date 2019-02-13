@@ -80,6 +80,7 @@ class ViewController: UIViewController {
         let seconds = LGSoundRecorder.shared.recordSeconds
         if seconds < 1 || recordPath == nil || recordPath == "" {
             print("录音不足1s")
+            self.noticeError("录音时间太短", autoClear: true, autoClearTime: 1)
             return;
         }
 		print("confirmRecordVoice...")

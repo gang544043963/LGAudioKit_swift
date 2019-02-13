@@ -13,7 +13,7 @@ import AVFoundation
 	@objc optional func soundRecordFailed() // 录音失败
 	@objc optional func soundRecordDidStop() // 录音停止
     @objc optional func soundRecordTooShort() // 录音时间太短（少于1秒）
-    @objc optional func soundRecordTimerTicks(second: NSInteger) // 录音过程中，没秒调用一次，返回当前录音时长
+    @objc optional func soundRecordTimerTicks(second: NSInteger) // 录音过程中，每秒调用一次，返回当前录音时长
 }
 
 class LGSoundRecorder: NSObject, AVAudioRecorderDelegate {
