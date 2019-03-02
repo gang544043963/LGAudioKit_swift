@@ -1,6 +1,6 @@
 # LGAudioKit_swift
 
-[OC版传送门](https://github.com/gang544043963/LGAudioKit/blob/master/README.md)
+[OC版传送门](https://github.com/gang544043963/LGAudioKit)
 
 ## sound recorder and player
 
