@@ -49,5 +49,10 @@ LGSoundPlayer.shared.playAudio(URLString: path as! NSString, atIndex: 0)
 ```
 atIndex预留
 
+## 说明
+
 - **目前能满足基本的录音和播放功能，正在努力在使其丰满。**
 - **希望对swift和音频有爱好的伙伴们贡献代码，能随手给个star那就再好不过了！**
+
+## Licence
+MIT
